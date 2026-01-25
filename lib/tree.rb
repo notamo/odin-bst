@@ -85,6 +85,30 @@ class Tree
     ret unless ret.empty?
   end
 
+  def preorder(root_node = root, &block)
+    return nil if root_node.nil?
+
+    yield root_node
+    preorder(root_node.left, &block)
+    preorder(root_node.right, &block)
+  end
+
+  def inorder(root_node = root, &block)
+    return nil if root_node.nil?
+
+    inorder(root_node.left, &block)
+    yield root_node
+    inorder(root_node.right, &block)
+  end
+
+  def postorder(root_node = root, &block)
+    return nil if root_node.nil?
+
+    postorder(root_node.left, &block)
+    postorder(root_node.right, &block)
+    yield root_node
+  end
+
   def pretty_print(node = root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
