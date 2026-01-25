@@ -5,13 +5,13 @@ input_array = Array.new(15) { rand(1..100) }
 bst = Tree.new(input_array)
 bst.pretty_print
 
-found = bst.find(input_array[0])
-if found.data == input_array[0]
-  puts 'Correct!'
-  puts "found.data: #{found.data}"
-  puts "input_array[0]: #{input_array[0]}"
-end
+p bst.level_order
 
-p bst.find(200)
+# counter = 0
+# bst.level_order do |node|
+#   puts "#{counter}. #{node.data}"
+#   counter += 1
+# end
+
 # bst.insert(10)
 # bst.pretty_print
