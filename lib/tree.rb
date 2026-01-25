@@ -64,6 +64,10 @@ class Tree
     end
   end
 
+  def height(value, root_node = root)
+    # TODO
+  end
+
   def level_order(root_node = root, &block)
     return unless root_node
 
