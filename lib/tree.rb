@@ -65,7 +65,22 @@ class Tree
   end
 
   def height(value, root_node = root)
-    # TODO
+    node = find(value)
+    return nil unless node
+
+    pretty_print(node)
+    levels = traverse_and_store_level(node, 0, {})
+    levels.values.max
+  end
+
+  def traverse_and_store_level(node, current_level, levels)
+    return unless node
+
+    levels[node] = current_level
+    traverse_and_store_level(node.left, current_level + 1, levels)
+    traverse_and_store_level(node.right, current_level + 1, levels)
+
+    levels
   end
 
   def level_order(root_node = root, &block)

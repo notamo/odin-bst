@@ -3,6 +3,7 @@ require_relative 'lib/tree'
 
 input_array = Array.new(15) { rand(1..100) }
 input_array.uniq!
+puts "Input array: #{input_array}"
 bst = Tree.new(input_array)
 puts 'Binary Search Tree (BST)'
 bst.pretty_print
@@ -31,5 +32,9 @@ end
 print 'DFS postorder: '
 p post_arr
 
-# root = input_array[0]
-# p bst.height(root)
+# node = input_array[0]
+# p bst.find(node).data
+
+value = input_array[0]
+puts "value: #{value}"
+puts "height(value): #{bst.height(value)}"
