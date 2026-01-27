@@ -48,9 +48,10 @@ class Tree
       # end
     end
   end
-  # def is_leaf?(node)
-  #  node.left.nil? && node.right.nil?
-  # end
+
+  def is_leaf?(node)
+    node.left.nil? && node.right.nil?
+  end
 
   def find(value, root_node = root)
     return unless root_node
@@ -73,7 +74,7 @@ class Tree
 
   def calculate_height(current_node)
     return 0 unless current_node
-    return 0 if current_node.left.nil? && current_node.right.nil?
+    return 0 if is_leaf?(current_node)
 
     left_height = calculate_height(current_node.left)
     right_height = calculate_height(current_node.right)
@@ -97,49 +98,49 @@ class Tree
     [left_depth, right_depth].max
   end
 
-  def level_order(root_node = root, &block)
-    return unless root_node
+  def level_order(node = root, &block)
+    return unless node
 
-    queue = [root_node]
+    queue = [node]
     ret = []
     until queue.empty?
-      current_node = queue.shift
+      current = queue.shift
 
       if block.nil?
-        ret << current_node.data
+        ret << current.data
       else
-        block.call current_node
+        block.call current
       end
 
-      queue.push(current_node.left) unless current_node.left.nil?
-      queue.push(current_node.right) unless current_node.right.nil?
+      queue.push(current.left) unless current.left.nil?
+      queue.push(current.right) unless current.right.nil?
     end
 
     ret unless ret.empty?
   end
 
-  def preorder(root_node = root, &block)
-    return nil if root_node.nil?
+  def preorder(node = root, &block)
+    return nil if node.nil?
 
-    yield root_node
-    preorder(root_node.left, &block)
-    preorder(root_node.right, &block)
+    block.call node
+    preorder(node.left, &block)
+    preorder(node.right, &block)
   end
 
-  def inorder(root_node = root, &block)
-    return nil if root_node.nil?
+  def inorder(node = root, &block)
+    return nil if node.nil?
 
-    inorder(root_node.left, &block)
-    yield root_node
-    inorder(root_node.right, &block)
+    inorder(node.left, &block)
+    block.call node
+    inorder(node.right, &block)
   end
 
-  def postorder(root_node = root, &block)
-    return nil if root_node.nil?
+  def postorder(node = root, &block)
+    return nil if node.nil?
 
-    postorder(root_node.left, &block)
-    postorder(root_node.right, &block)
-    yield root_node
+    postorder(node.left, &block)
+    postorder(node.right, &block)
+    block.call node
   end
 
   def pretty_print(node = root, prefix = '', is_left = true)
