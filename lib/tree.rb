@@ -71,14 +71,30 @@ class Tree
     calculate_height(node)
   end
 
-  def calculate_height(root_node)
-    return 0 unless root_node
-    return 0 if root_node.left.nil? && root_node.right.nil?
+  def calculate_height(current_node)
+    return 0 unless current_node
+    return 0 if current_node.left.nil? && current_node.right.nil?
 
-    left_height = calculate_height(root_node.left)
-    right_height = calculate_height(root_node.right)
+    left_height = calculate_height(current_node.left)
+    right_height = calculate_height(current_node.right)
 
     [left_height, right_height].max + 1
+  end
+
+  def depth(value)
+    node = find(value)
+    return nil unless node
+
+    calculate_depth(root, node, 0)
+  end
+
+  def calculate_depth(current_node, node, current_level)
+    return 0 unless current_node
+    return current_level if current_node == node
+
+    left_depth = calculate_depth(current_node.left, node, current_level + 1)
+    right_depth = calculate_depth(current_node.right, node, current_level + 1)
+    [left_depth, right_depth].max
   end
 
   def level_order(root_node = root, &block)
