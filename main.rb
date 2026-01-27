@@ -34,28 +34,42 @@ def run
 
   bst = Tree.new(input_array)
   puts 'Binary Search Tree (BST)'
+  bst.insert(115)
+  bst.insert(113)
+  bst.insert(117)
+  bst.insert(114)
+  bst.insert(120)
+  bst.insert(118)
   bst.pretty_print
 
-  puts "balanced?: #{bst.balanced?}"
-
-  print_level_pre_in_post(bst)
-
-  bst.insert(121)
-  bst.insert(151)
-  bst.insert(133)
-  puts 'Binary Search Tree (BST) after inserts'
+  # test delete
+  puts "deleting #{input_array[0]}..."
+  bst.delete(input_array[0])
+  # puts 'deleting 118...'
+  # bst.delete(118)
+  # puts 'deleting 120...'
+  # bst.delete(120)
+  # puts 'deleting 115...'
+  # bst.delete(115)
   bst.pretty_print
-  puts "balanced?: #{bst.balanced?}"
 
-  bst.rebalance
-  puts 'Binary Search Tree (BST) after rebalance'
-  bst.pretty_print
-  puts "balanced?: #{bst.balanced?}"
+  # puts "balanced?: #{bst.balanced?}"
 
-  print_level_pre_in_post(bst)
+  # print_level_pre_in_post(bst)
 
-  # node = input_array[0]
-  # p bst.find(node).data
+  # bst.insert(121)
+  # bst.insert(151)
+  # bst.insert(133)
+  # puts 'Binary Search Tree (BST) after inserts'
+  # bst.pretty_print
+  # puts "balanced?: #{bst.balanced?}"
+
+  # bst.rebalance
+  # puts 'Binary Search Tree (BST) after rebalance'
+  # bst.pretty_print
+  # puts "balanced?: #{bst.balanced?}"
+
+  # print_level_pre_in_post(bst)
 end
 
 run
