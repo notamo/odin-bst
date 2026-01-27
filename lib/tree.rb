@@ -98,6 +98,16 @@ class Tree
     [left_depth, right_depth].max
   end
 
+  def balanced?(node = root)
+    h_left =  node.left  ? height(node.left.data)  : 0
+    h_right = node.right ? height(node.right.data) : 0
+    return false if (h_left - h_right).abs > 1
+    return false if node.left && !balanced?(node.left)
+    return false if node.right && !balanced?(node.right)
+
+    true
+  end
+
   def level_order(node = root, &block)
     return unless node
 

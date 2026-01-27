@@ -39,3 +39,5 @@ value = input_array[0]
 puts "value: #{value}"
 puts "height(value): #{bst.height(value)}"
 puts "depth(value): #{bst.depth(value)}"
+
+puts "balanced?: #{bst.balanced?}"
