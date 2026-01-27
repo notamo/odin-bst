@@ -1,5 +1,6 @@
 class Tree
-  attr_reader :array, :root
+  attr_accessor :root
+  attr_reader :array
 
   def initialize(arr)
     @array = arr.sort.uniq
@@ -41,7 +42,7 @@ class Tree
       delete(key, root_node.right)
     else
       # found element to delete
-      # if is_leaf?(root_node)
+      # if leaf?(root_node)
       #   PROBLEM: to delete current node I need a reference to it's parent
       #   I should probably traverse tree in level-order and inspect currently
       #   visited node's children...
@@ -49,7 +50,7 @@ class Tree
     end
   end
 
-  def is_leaf?(node)
+  def leaf?(node)
     node.left.nil? && node.right.nil?
   end
 
@@ -74,7 +75,7 @@ class Tree
 
   def calculate_height(current_node)
     return 0 unless current_node
-    return 0 if is_leaf?(current_node)
+    return 0 if leaf?(current_node)
 
     left_height = calculate_height(current_node.left)
     right_height = calculate_height(current_node.right)
@@ -99,13 +100,21 @@ class Tree
   end
 
   def balanced?(node = root)
-    h_left =  node.left  ? height(node.left.data)  : 0
-    h_right = node.right ? height(node.right.data) : 0
+    h_left =  node.left.nil?  ? 0 : (height(node.left.data)  || 0)
+    h_right = node.right.nil? ? 0 : (height(node.right.data) || 0)
+
     return false if (h_left - h_right).abs > 1
-    return false if node.left && !balanced?(node.left)
+    return false if node.left  && !balanced?(node.left)
     return false if node.right && !balanced?(node.right)
 
     true
+  end
+
+  def rebalance
+    return if balanced?
+
+    arr = level_order
+    self.root = build_tree(arr)
   end
 
   def level_order(node = root, &block)
