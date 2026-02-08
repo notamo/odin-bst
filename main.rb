@@ -28,19 +28,44 @@ def print_level_pre_in_post(bst)
 end
 
 def run
+  # 1. Create a binary search tree from an array of random numbers
   input_array = Array.new(15) { rand(1..100) }
   input_array.uniq!
   puts "Input array: #{input_array}"
 
   bst = Tree.new(input_array)
   puts 'Binary Search Tree (BST)'
+  bst.pretty_print
+
+  # 2. Confirm that the tree is balanced
+  puts "balanced?: #{bst.balanced?}"
+
+  # 3. Print out all elements in level, pre, post, and in order
+  print_level_pre_in_post(bst)
+
+  # 4. Unbalance the tree by adding several numbers whose value is more than 100
   bst.insert(115)
   bst.insert(113)
   bst.insert(117)
   bst.insert(114)
   bst.insert(120)
   bst.insert(118)
-  bst.pretty_print
+  # puts 'BST after insertion'
+  # bst.pretty_print
+
+  # 5. Confirm that the tree is unbalanced
+  puts "balanced?: #{bst.balanced?}"
+
+  # 6. Balance the tree
+  bst.rebalance
+  # puts 'BST after rebalance'
+  # bst.pretty_print
+
+  # 7. Confirm that the tree is balanced
+  puts "balanced?: #{bst.balanced?}"
+
+  # 8. Print out all elements in level, pre, post, and in order
+  print_level_pre_in_post(bst)
 
   # test delete
   # puts "deleting #{input_array[0]}..."
@@ -53,8 +78,6 @@ def run
   # puts 'deleting 115...'
   # bst.delete(115)
   # bst.pretty_print
-
-  # puts "balanced?: #{bst.balanced?}"
 
   # print_level_pre_in_post(bst)
 
