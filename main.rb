@@ -66,34 +66,6 @@ def run
 
   # 8. Print out all elements in level, pre, post, and in order
   print_level_pre_in_post(bst)
-
-  # test delete
-  # puts "deleting #{input_array[0]}..."
-  # bst.delete(input_array[0])
-  # bst.delete(input_array[0], nil)
-  # puts 'deleting 118...'
-  # bst.delete(118)
-  # puts 'deleting 120...'
-  # bst.delete(120)
-  # puts 'deleting 115...'
-  # bst.delete(115)
-  # bst.pretty_print
-
-  # print_level_pre_in_post(bst)
-
-  # bst.insert(121)
-  # bst.insert(151)
-  # bst.insert(133)
-  # puts 'Binary Search Tree (BST) after inserts'
-  # bst.pretty_print
-  # puts "balanced?: #{bst.balanced?}"
-
-  # bst.rebalance
-  # puts 'Binary Search Tree (BST) after rebalance'
-  # bst.pretty_print
-  # puts "balanced?: #{bst.balanced?}"
-
-  # print_level_pre_in_post(bst)
 end
 
 run
