@@ -124,7 +124,7 @@ class Tree
     return if balanced?
 
     arr = level_order
-    self.root = build_tree(arr)
+    self.root = Tree.new(arr).root
   end
 
   def level_order(node = root, &block)
