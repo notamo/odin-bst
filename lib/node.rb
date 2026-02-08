@@ -12,4 +12,8 @@ class Node
   def <=>(other)
     data <=> other.data
   end
+
+  def to_s
+    puts "Node: data=#{data} left=#{left} right=#{right}"
+  end
 end

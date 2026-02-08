@@ -43,15 +43,16 @@ def run
   bst.pretty_print
 
   # test delete
-  puts "deleting #{input_array[0]}..."
-  bst.delete(input_array[0])
+  # puts "deleting #{input_array[0]}..."
+  # bst.delete(input_array[0])
+  # bst.delete(input_array[0], nil)
   # puts 'deleting 118...'
   # bst.delete(118)
   # puts 'deleting 120...'
   # bst.delete(120)
   # puts 'deleting 115...'
   # bst.delete(115)
-  bst.pretty_print
+  # bst.pretty_print
 
   # puts "balanced?: #{bst.balanced?}"
 

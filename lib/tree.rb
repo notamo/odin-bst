@@ -30,75 +30,34 @@ class Tree
   end
 
   def delete(key, node = root)
-    # TODO: handle case when you want to delete root node
+    # puts "inside delete: key=#{key}, currently visited node=#{node.data}"
+    return unless node
 
-    target_node = nil
-    target_node_parent = nil
-
-    level_order(node) do |current|
-      children = [current.left, current.right].compact
-
-      targets = children.filter { |child| child.data == key }
-      unless targets.empty?
-        target_node = targets.pop
-        target_node_parent = current
-        break
-      end
-    end
-
-    # puts "target_node=#{target_node.data}"
-    # puts "target_node_parent=#{target_node_parent.data}"
-
-    case count_children(target_node)
-    when 0
-      delete_leaf(target_node, target_node_parent)
-    when 1
-      delete_with_one_child(target_node, target_node_parent)
-    when 2
-      delete_with_two_children(target_node, target_node_parent)
-    end
-  end
-
-  def count_children(node)
-    case [node.left.nil?, node.right.nil?].count(true)
-    when 0
-      2
-    when 1
-      1
-    when 2
-      0
-    end
-  end
-
-  def delete_leaf(target, parent)
-    puts "inside delete_leaf: target=#{target.data} parent=#{parent.data}"
-
-    if parent.left == target
-      parent.left = nil
+    if key < node.data
+      node.left = delete(key, node.left)
+    elsif key > node.data
+      node.right = delete(key, node.right)
     else
-      parent.right = nil
+      # puts "key=#{key} found!"
+
+      # 0 or 1 child
+      return node.left if node.right.nil?
+      return node.right if node.left.nil?
+
+      # 2 child
+      # puts "min=#{min(node).data}"
+      min = min(node)
+      node.data = min.data
+      node.right = delete(min.data, node.right)
     end
+
+    self.root = node
   end
 
-  def delete_with_one_child(target, parent)
-    puts "inside delete_with_one_child: target=#{target.data} parent=#{parent.data}"
-
-    if parent.left == target
-      parent.left = target.left || target.right
-    else
-      parent.right = target.left || target.right
-    end
-  end
-
-  def delete_with_two_children(target, parent)
-    print "inside delete_with_two_children: target=#{target.data} parent=#{parent.data}"
-
-    min = target.right
-    min = min.left until min.left.nil?
-    puts " min=#{min.data}"
-
-    target.data = min.data
-    delete(min.data, target)
+  def min(node) # get min element from given node's right subtree
+    current = node.right
+    current = current.left while current.left
+    current
   end
 
   def leaf?(node)
